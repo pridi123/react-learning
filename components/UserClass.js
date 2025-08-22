@@ -7,13 +7,12 @@ class UserClass extends React.Component {
 
         this.state = {
             count: 0,
-            count2: 2,
         };
     }
 
   render() {
 
-    const{count, count2} = this.state;
+    const{count} = this.state;
 
     return (
       <div className="user-card">
@@ -21,7 +20,13 @@ class UserClass extends React.Component {
         <p>Location: Oros</p>
         <p>Contact: priyadalvi@gmail.com</p>
         <p>Count: {count}</p>
-        <p>Count2: {count2}</p>  
+        <button
+          onClick={() => {
+            //Never update state directly
+            this.setState({ count: count + 1 });
+            console.log("Button clicked");
+          }}
+          > Increment </button>
         </div>
     );
     }

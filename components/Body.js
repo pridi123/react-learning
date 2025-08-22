@@ -1,6 +1,8 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // import mockRestaurants from "../utils/mockData";
 
@@ -43,6 +45,7 @@ const Body = () => {
   // return listOfRestaurants.length === 0 ? (
   //   <Shimmer />
   // )
+  const navigate = useNavigate();
   return !Array.isArray(listOfRestaurants) || listOfRestaurants.length === 0 ? (
   <Shimmer />
   ) : (
@@ -88,8 +91,22 @@ const Body = () => {
       </div>
       <div className="res-container">
         {/* {listOfRestaurants.map((restaurant) => ( */}
+        {/* {filteredRestaurant.map((restaurant) => (
+          // <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          <Link to = {"/restaurants/"+ restaurant.info.id} key={restaurant.info.id}>
+
+            <RestaurantCard key={restaurant.info.id} resData={restaurant} />     
+
+          </Link>
+        ))} */}
         {filteredRestaurant.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          <div
+            key={restaurant.info.id}
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("/restaurants/" + restaurant.info.id)}
+          >
+            <RestaurantCard resData={restaurant} />
+          </div>
         ))}
       </div>
     </div>
